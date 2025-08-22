@@ -1,11 +1,16 @@
 package com.example.telegram_bot.handlers;
 
-import com.example.telegram_bot.model.Message;
+import com.example.telegram_bot.service.CurrencyService;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 
 @Component
 public class CurrencyCommandHandler implements CommandHandler {
+
+    @Autowired
+    private CurrencyService currencyService;
 
     @PostConstruct
     public void init() {
@@ -14,11 +19,16 @@ public class CurrencyCommandHandler implements CommandHandler {
 
     @Override
     public String command() {
-        return "";
+        return "/currency";
     }
 
     @Override
     public String handle(Message message) {
-        return "";
+        return currencyService.getUsdRate();
+    }
+
+    @Override
+    public String description() {
+        return "актуальный курс доллара";
     }
 }

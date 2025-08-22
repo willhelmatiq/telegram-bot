@@ -1,8 +1,9 @@
 package com.example.telegram_bot.handlers;
 
-import com.example.telegram_bot.model.Message;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 
 public interface CommandHandler {
     String command();
     String handle(Message message);
+    String description();
 }

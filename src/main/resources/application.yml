@@ -1,3 +1,10 @@
 spring:
   application:
     name: telegram-bot
+
+telegrambots:
+  botToken: ${TOKEN}
+
+logging:
+  level:
+    com.example.telegram_bot.aspect: INFO
