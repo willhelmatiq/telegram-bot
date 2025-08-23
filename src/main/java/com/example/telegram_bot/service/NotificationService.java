@@ -38,8 +38,11 @@ public class NotificationService {
     }
 
     @Async
-    public void notifyException(String title, String context, Throwable ex) {
-        if (!isEnabled() || shouldSkip(ex)) return;
+    public void notifyException(String title, String context, Throwable ex, Long userId) {
+        if (!isEnabled() || shouldSkip(ex)) {
+            return;
+        }
+        Long chatId = userId != null ? userId : props.getChatId();
 
         StringBuilder sb = new StringBuilder();
         sb.append("🚨 <b>").append(escape(title)).append("</b>\n");
@@ -62,7 +65,7 @@ public class NotificationService {
         }
 
         SendMessage msg = SendMessage.builder()
-                .chatId(props.getChatId())
+                .chatId(chatId)
                 .text(text)
                 .parseMode(ParseMode.HTML)
                 .disableWebPagePreview(true)

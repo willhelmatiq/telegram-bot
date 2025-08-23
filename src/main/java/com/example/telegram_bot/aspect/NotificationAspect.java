@@ -24,9 +24,16 @@ public class NotificationAspect {
         try {
             return joinPoint.proceed();
         } catch (Throwable ex) {
+            Object[] objects = joinPoint.getArgs();
+            Long userId = null;
+            for (Object o : objects) {
+                if (o instanceof Message) {
+                    userId = ((Message) o).getFrom().getId();
+                }
+            }
             String title = buildTitle(joinPoint);
             String context = buildContext(joinPoint.getArgs());
-            notifications.notifyException(title, context, ex);
+            notifications.notifyException(title, context, ex, userId);
             throw ex;
         }
     }
