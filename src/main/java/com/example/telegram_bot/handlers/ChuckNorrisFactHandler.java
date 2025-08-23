@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 
 @Component
+@LogCommand
 public class ChuckNorrisFactHandler implements CommandHandler{
 
     private final Faker faker = new Faker();
@@ -16,7 +17,6 @@ public class ChuckNorrisFactHandler implements CommandHandler{
     }
 
     @Override
-    @LogCommand
     public String handle(Message message) {
         return faker.chuckNorris().fact();
     }

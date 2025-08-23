@@ -1,4 +1,4 @@
-package com.example.telegram_bot.model;
+package com.example.telegram_bot.dto;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -8,7 +8,7 @@ import lombok.Data;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
-public class Valute {
+public class ValuteDto {
 
     @XmlAttribute(name = "ID")
     private String id;

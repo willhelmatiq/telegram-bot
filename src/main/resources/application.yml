@@ -1,10 +1,20 @@
 spring:
   application:
     name: telegram-bot
+    performance:
+      threshold-ms: 500
+    notifications:
+      enabled: true
+      chat-id: ${CHAT_ID}
+      include-stacktrace: true
+      stacktrace-max-lines: 15
+      skip-exceptions:
+        - com.example.telegram_bot.exception.AccessDeniedException
 
 telegrambots:
   botToken: ${TOKEN}
+  adminUsers: ${ADMIN_USERS}
 
 logging:
   level:
-    com.example.telegram_bot.aspect: INFO
+    com.example.telegram_bot.aspect: DEBUG

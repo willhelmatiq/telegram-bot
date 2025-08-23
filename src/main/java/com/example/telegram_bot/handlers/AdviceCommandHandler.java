@@ -1,7 +1,6 @@
 package com.example.telegram_bot.handlers;
 
 import jakarta.annotation.PostConstruct;
-import net.datafaker.Faker;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 
@@ -33,6 +32,7 @@ public class AdviceCommandHandler implements CommandHandler {
 
     @Override
     public String handle(Message message) {
+//        throw new RuntimeException("Test");   //для проверки нотификаций
         return advices.get(random.nextInt(advices.size()));
     }
 

@@ -1,6 +1,6 @@
 package com.example.telegram_bot.service;
 
-import com.example.telegram_bot.model.ValCurs;
+import com.example.telegram_bot.dto.ValCursDto;
 import jakarta.xml.bind.JAXBContext;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -20,9 +20,9 @@ public class CurrencyService {
 
         String xml = restTemplate.getForObject(url, String.class);
         try {
-            JAXBContext context = JAXBContext.newInstance(ValCurs.class);
+            JAXBContext context = JAXBContext.newInstance(ValCursDto.class);
             var unmarshaller = context.createUnmarshaller();
-            ValCurs valCurs = (ValCurs) unmarshaller.unmarshal(new StringReader(xml));
+            ValCursDto valCurs = (ValCursDto) unmarshaller.unmarshal(new StringReader(xml));
 
             return valCurs.getValutes().stream()
                     .filter(v -> "USD".equals(v.getCharCode()))

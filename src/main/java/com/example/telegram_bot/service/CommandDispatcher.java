@@ -1,6 +1,5 @@
 package com.example.telegram_bot.service;
 
-import com.example.telegram_bot.util.AppContextHolder;
 import com.example.telegram_bot.handlers.CommandHandler;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class CommandDispatcher {
 
-    private Map<String, CommandHandler> handlers;
+    private final Map<String, CommandHandler> handlers;
 
     private final ApplicationContext context;
 
@@ -47,8 +46,7 @@ public class CommandDispatcher {
     // для дебага
     @PostConstruct
     private void init() {
-//        ApplicationContext ctx = AppContextHolder.getContext();
-        context.getBean(CommandHandler.class);
+//        context.getBean(CommandHandler.class);
         System.out.println("Init method");
     }
 }

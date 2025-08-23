@@ -13,9 +13,18 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(properties = {
-        "telegrambots.enabled=false" // чтобы стартер бота не стартовал
+        "telegrambots.enabled=false",
+        "telegrambots.botToken=test-token",
+        "telegrambots.adminUsers=111",
+        "spring.application.notifications.chat-id=0"
 })
 class HandlersWiringTest {
+
+    public static final String ADVICE = "/advice";
+    public static final String CHUCK_NORRIS = "/chuck_norris_fact";
+    public static final String CURRENCY = "/currency";
+    public static final String QUOTE = "/quote";
+    public static final String STATS = "/stats";
 
     @Autowired
     private List<CommandHandler> handlerList;
@@ -26,7 +35,6 @@ class HandlersWiringTest {
     @Test
     void listAndMapHaveExpectedSizes() {
         assertThat(handlerList).isNotEmpty();
-        // вытащим приватную Map
         @SuppressWarnings("unchecked")
         Map<String, CommandHandler> map =
                 (Map<String, CommandHandler>) ReflectionTestUtils.getField(dispatcher, "handlers");
@@ -35,6 +43,7 @@ class HandlersWiringTest {
         assertThat(map.size()).isLessThanOrEqualTo(handlerList.size());
 
         // как минимум три команды по задаче
-        assertThat(map.keySet()).contains("/quote", "/currency", "/advice", "/chuck_norris_fact");
+        assertThat(map.keySet())
+                .contains(ADVICE, CHUCK_NORRIS, CURRENCY, QUOTE, STATS);
     }
 }

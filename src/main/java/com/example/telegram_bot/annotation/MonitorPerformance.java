@@ -2,8 +2,8 @@ package com.example.telegram_bot.annotation;
 
 import java.lang.annotation.*;
 
-@Target(ElementType.TYPE)
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface LogCommand {
+public @interface MonitorPerformance {
 }
