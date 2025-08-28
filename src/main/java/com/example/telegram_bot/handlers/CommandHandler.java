@@ -4,6 +4,8 @@ import org.telegram.telegrambots.meta.api.objects.message.Message;
 
 public interface CommandHandler {
     String command();
+
     String handle(Message message);
+
     String description();
 }

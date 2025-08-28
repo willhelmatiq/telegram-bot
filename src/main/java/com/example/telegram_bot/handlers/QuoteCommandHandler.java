@@ -26,19 +26,13 @@ public class QuoteCommandHandler implements CommandHandler {
     }
 
     @Override
-    @MonitorPerformance()
+    @MonitorPerformance
     public String handle(Message message) {
-        // нужно для теста работы @MonitorPerformance()
-//        try {
-//            Thread.sleep( 600);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
         return faker.yoda().quote();
     }
 
     @Override
     public String description() {
         return "случайная цитата Магистра Йоды";
-    }
+    } //magic string
 }

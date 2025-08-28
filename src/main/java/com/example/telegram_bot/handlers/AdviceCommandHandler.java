@@ -39,5 +39,5 @@ public class AdviceCommandHandler implements CommandHandler {
     @Override
     public String description() {
         return "случайный совет дня";
-    }
+    } //magic string
 }

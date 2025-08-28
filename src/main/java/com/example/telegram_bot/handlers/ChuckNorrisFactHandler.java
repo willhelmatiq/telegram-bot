@@ -7,7 +7,7 @@ import org.telegram.telegrambots.meta.api.objects.message.Message;
 
 @Component
 @LogCommand
-public class ChuckNorrisFactHandler implements CommandHandler{
+public class ChuckNorrisFactHandler implements CommandHandler {
 
     private final Faker faker = new Faker();
 

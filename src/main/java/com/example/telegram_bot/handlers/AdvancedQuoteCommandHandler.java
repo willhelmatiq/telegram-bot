@@ -1,7 +1,7 @@
 package com.example.telegram_bot.handlers;
 
 import jakarta.annotation.PostConstruct;
-import org.springframework.context.annotation.Primary;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 
@@ -12,15 +12,16 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 //@Primary
-public class AdvancedQuoteCommandHandler implements CommandHandler{
+public class AdvancedQuoteCommandHandler implements CommandHandler {
 
     private final Random random = new Random();
 
     @PostConstruct
     public void init() {
-        System.out.println(this.getClass().getCanonicalName() + "is initialized");
+        log.info(this.getClass().getCanonicalName() + "is initialized");
     }
 
     @Override
@@ -31,19 +32,18 @@ public class AdvancedQuoteCommandHandler implements CommandHandler{
     @Override
     public String handle(Message message) {
         ResourceReader rr = new ResourceReader();
-        List<String> lines = null;
         try {
-            lines = rr.readAllLines("advancedQuotes.txt");
+            List<String> lines = rr.readAllLines("advancedQuotes.txt");
+            return lines.get(random.nextInt(lines.size()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return lines.get(random.nextInt(lines.size()));
     }
 
     @Override
     public String description() {
         return "случайная цитата Магистра Йоды";
-    }
+    } // magic string
 
     static class ResourceReader {
         public List<String> readAllLines(String fileName) throws Exception {

@@ -1,9 +1,10 @@
 package com.example.telegram_bot;
 
+import com.example.telegram_bot.configuration.TelegramConfiguration;
 import com.example.telegram_bot.exception.AccessDeniedException;
 import com.example.telegram_bot.service.CommandDispatcher;
 import com.example.telegram_bot.service.StatisticService;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.longpolling.BotSession;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
@@ -15,23 +16,17 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
+@RequiredArgsConstructor
 public class TBot implements SpringLongPollingBot, LongPollingSingleThreadUpdateConsumer {
 
-    private final String token;
     private final BotTelegramClient telegramClient;
     private final CommandDispatcher commandDispatcher;
     private final StatisticService statisticService;
-
-    public TBot(@Value("${telegrambots.botToken}") String token, BotTelegramClient telegramClient, CommandDispatcher commandDispatcher, StatisticService statisticService) {
-        this.token = token;
-        this.telegramClient = telegramClient;
-        this.commandDispatcher = commandDispatcher;
-        this.statisticService = statisticService;
-    }
+    private final TelegramConfiguration telegramConfiguration;
 
     @Override
     public String getBotToken() {
-        return token;
+        return telegramConfiguration.getToken();
     }
 
     @Override

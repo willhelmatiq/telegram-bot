@@ -20,14 +20,12 @@ import java.util.concurrent.TimeUnit;
 public class PerformanceAspect {
     private static final Logger log = LoggerFactory.getLogger(PerformanceAspect.class);
 
-    @Value("${spring.application.performance.threshold-ms}")
+    @Value("${spring.application.performance.threshold-ms:500}")
     private long thresholdMs;
 
     @Around("@annotation(com.example.telegram_bot.annotation.MonitorPerformance) || " +
             "@within(com.example.telegram_bot.annotation.MonitorPerformance)")
     public Object measureExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
-        MonitorPerformance ann = resolveAnnotation(joinPoint);
-
         long startNs = System.nanoTime();
         try {
             Object result = joinPoint.proceed();
@@ -54,17 +52,6 @@ public class PerformanceAspect {
                     buildContext(joinPoint.getArgs()));
             throw ex;
         }
-    }
-
-    private MonitorPerformance resolveAnnotation(ProceedingJoinPoint joinPoint) {
-        MethodSignature ms = (MethodSignature) joinPoint.getSignature();
-        Method method = ms.getMethod();
-        MonitorPerformance ann = AnnotationUtils.findAnnotation(method, MonitorPerformance.class);
-        if (ann != null) {
-            return ann;
-        }
-        Class<?> targetClass = joinPoint.getTarget() != null ? joinPoint.getTarget().getClass() : ms.getDeclaringType();
-        return AnnotationUtils.findAnnotation(targetClass, MonitorPerformance.class);
     }
 
     private String buildContext(Object[] args) {

@@ -2,15 +2,16 @@ package com.example.telegram_bot.handlers;
 
 import com.example.telegram_bot.service.CurrencyService;
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 
 @Component
+@RequiredArgsConstructor
 public class CurrencyCommandHandler implements CommandHandler {
 
-    @Autowired
-    private CurrencyService currencyService;
+    private final CurrencyService currencyService;
 
     @PostConstruct
     public void init() {

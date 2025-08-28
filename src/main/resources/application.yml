@@ -5,15 +5,15 @@ spring:
       threshold-ms: 500
     notifications:
       enabled: true
-      chat-id: ${CHAT_ID}
+      chat-id: 1
       include-stacktrace: true
       stacktrace-max-lines: 15
       skip-exceptions:
         - com.example.telegram_bot.exception.AccessDeniedException
 
 telegrambots:
-  botToken: ${TOKEN}
-  adminUsers: ${ADMIN_USERS}
+  botToken: 8342502229:AAGjhx4-Zvtjyau5nMyKup5l6vzwoq_K82k
+  admin-users: 1, 15, 5000, -112512412, 1234
 
 logging:
   level:

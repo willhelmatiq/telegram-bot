@@ -2,6 +2,7 @@ package com.example.telegram_bot.handlers;
 
 import com.example.telegram_bot.annotation.AdminOnly;
 import com.example.telegram_bot.service.StatisticService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
@@ -9,10 +10,10 @@ import org.telegram.telegrambots.meta.api.objects.message.Message;
 import java.util.stream.Collectors;
 
 @Component
-public class StatisticCommandHandler implements CommandHandler{
+@RequiredArgsConstructor
+public class StatisticCommandHandler implements CommandHandler {
 
-    @Autowired
-    private StatisticService statisticService;
+    private final StatisticService statisticService;
 
     @Override
     public String command() {
@@ -26,7 +27,7 @@ public class StatisticCommandHandler implements CommandHandler{
                 .map(StatisticService.HistoryItem::toString)
                 .collect(Collectors.joining("\n"));
         if (statistic.isBlank()) {
-            return "There are no statistics yet";
+            return "There are no statistics yet"; //magic string
         }
         return statistic;
     }
@@ -34,5 +35,5 @@ public class StatisticCommandHandler implements CommandHandler{
     @Override
     public String description() {
         return "показать статистику пользователей";
-    }
+    } //magic string
 }

@@ -2,6 +2,7 @@ package com.example.telegram_bot.aspect;
 
 import com.example.telegram_bot.configuration.AdminConfig;
 import com.example.telegram_bot.exception.AccessDeniedException;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -10,10 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.message.Message;
 
+@Slf4j
 @Aspect
 @Component
 public class SecurityAspect {
-    private static final Logger log = LoggerFactory.getLogger(SecurityAspect.class);
+//    private static final Logger log = LoggerFactory.getLogger(SecurityAspect.class);
 
     @Autowired
     private AdminConfig adminConfig;
